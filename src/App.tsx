@@ -2,7 +2,7 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
-import { Button } from './design-system'
+import { Button, HeaderTab, Tabs } from './design-system'
 import './App.css'
 
 function App() {
@@ -30,6 +30,36 @@ function App() {
           >
             Count is {count}
           </Button>
+        </div>
+        <div className="ds-tabs-preview">
+          <p className="ds-tabs-preview__label">HeaderTab (Figma states)</p>
+          <div className="ds-tabs-preview__row">
+            <HeaderTab state="Rest" text="MAPS" />
+            <HeaderTab state="Hover" text="MAPS" />
+            <HeaderTab state="Selected" text="MAPS" />
+          </div>
+          <p className="ds-tabs-preview__label">Tabs (data-driven)</p>
+          <Tabs
+            aria-label="Example sections"
+            defaultValue="maps"
+            items={[
+              {
+                id: 'maps',
+                text: 'MAPS',
+                content: <p>Maps panel content.</p>,
+              },
+              {
+                id: 'lists',
+                text: 'LISTS',
+                content: <p>Lists panel content.</p>,
+              },
+              {
+                id: 'reports',
+                text: 'REPORTS',
+                content: <p>Reports panel content.</p>,
+              },
+            ]}
+          />
         </div>
       </section>
 
