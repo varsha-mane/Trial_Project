@@ -1,9 +1,9 @@
 import type { ReactNode } from 'react'
 
 /**
- * Figma `HeaderTab` — `State` property (Selected | Rest | Hover).
+ * Figma `HeaderTab` — `State` property (Selected | Rest | Hover | Disabled).
  */
-export type TabState = 'Selected' | 'Rest' | 'Hover'
+export type TabState = 'Selected' | 'Rest' | 'Hover' | 'Disabled'
 
 /**
  * Figma `HeaderTab` props (naming aligned with dev mode / Code Connect).
@@ -12,6 +12,7 @@ export interface HeaderTabProps {
   className?: string
   state?: TabState
   text?: string
+  disabled?: boolean
 }
 
 export interface TabsItem {

@@ -6,16 +6,49 @@
   margin-bottom: 24px;
 }
 
+.ds-checkbox-preview {
+  width: 100%;
+  max-width: 640px;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.ds-checkbox-preview__row {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.ds-radio-preview {
+  width: 100%;
+  max-width: 640px;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.ds-radio-preview__row {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.ds-radio-preview__row--inline {
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 24px 28px;
+}
+
 .ds-tabs-preview {
   width: 100%;
   max-width: 640px;
   text-align: left;
-}
-
-.ds-tabs-preview__label {
-  font-size: 14px;
-  color: var(--text);
-  margin: 0 0 8px;
 }
 
 .ds-tabs-preview__row {
@@ -25,6 +58,44 @@
   gap: 0;
   margin-bottom: 24px;
   border-bottom: 1px solid var(--border);
+}
+
+.ds-upload-preview {
+  width: 100%;
+  max-width: 1280px;
+  text-align: left;
+  margin-bottom: 8px;
+}
+
+.ds-upload-preview__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.ds-app-card-gallery {
+  width: 100%;
+  max-width: 1280px;
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.ds-app-card-gallery__grid {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 20px 16px;
+}
+
+.ds-app-card-gallery__cell {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-width: 100%;
 }
 
 .hero {
@@ -127,7 +198,11 @@
 
   a {
     color: var(--text-h);
-    font-size: 16px;
+    font-family: var(--maps-font-family-sans);
+    font-size: var(--maps-font-size-body);
+    line-height: var(--maps-line-height-body);
+    letter-spacing: var(--maps-letter-spacing-body);
+    font-weight: var(--maps-font-weight-regular);
     border-radius: 6px;
     background: var(--social-bg);
     display: flex;

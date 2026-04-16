@@ -1,6 +1,9 @@
 /**
  * Figma Code Connect — `HeaderTab` (MAPS file).
  * Run: npx figma connect publish (see Figma Code Connect docs).
+ * 
+ * NOTE: Code Connect mapping already exists in Figma for this node.
+ * Delete the existing mapping in Figma before re-publishing.
  */
 import figma from '@figma/code-connect/react'
 import { HeaderTab } from './Tabs'
@@ -14,11 +17,15 @@ figma.connect(
         Selected: 'Selected',
         Rest: 'Rest',
         Hover: 'Hover',
+        Disabled: 'Disabled',
       }),
-      text: figma.string('text'),
     },
-    example: ({ state, text }) => (
-      <HeaderTab state={state} text={text} />
-    ),
+    example: ({ state }) => {
+      const disabled = state === 'Disabled'
+      const displayState = disabled ? 'Rest' : (state as 'Selected' | 'Rest' | 'Hover')
+      return <HeaderTab state={displayState} text="MAPS" disabled={disabled} />
+    },
   },
 )
+
+

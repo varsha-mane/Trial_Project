@@ -1,5 +1,6 @@
 @import 'tailwindcss';
-@import './design-system/tokens/components/button.css';
+
+@config '../tailwind.config.js';
 
 :root {
   --text: #6b6375;
@@ -14,12 +15,31 @@
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
+  /* Mirror src/design-system/styles/typography.ts (MAPS type scale) */
+  --maps-font-family-sans: Inter, Roboto, system-ui, sans-serif;
+  --maps-font-size-display: 24px;
+  --maps-line-height-display: 28px;
+  --maps-letter-spacing-display: 0.125em;
+  --maps-font-size-heading-lg: 20px;
+  --maps-line-height-heading-lg: 30px;
+  --maps-letter-spacing-heading-lg: -0.022em;
+  --maps-font-size-body: 16px;
+  --maps-line-height-body: 24px;
+  --maps-letter-spacing-body: 0em;
+  --maps-font-size-ui: 16px;
+  --maps-line-height-ui: 24px;
+  --maps-letter-spacing-ui: 0.03em;
+  --maps-font-weight-regular: 400;
+  --maps-font-weight-medium: 500;
+  --maps-font-weight-semibold: 600;
+  --maps-font-weight-bold: 700;
+
+  --sans: var(--maps-font-family-sans);
+  --heading: var(--maps-font-family-sans);
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
+  font: var(--maps-font-size-body) / var(--maps-line-height-body) var(--maps-font-family-sans);
+  letter-spacing: var(--maps-letter-spacing-body);
   color-scheme: light dark;
   color: var(--text);
   background: var(--bg);
@@ -27,10 +47,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -72,27 +88,25 @@ body {
 h1,
 h2 {
   font-family: var(--heading);
-  font-weight: 500;
   color: var(--text-h);
 }
 
+/* display / page title */
 h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
+  font-size: var(--maps-font-size-display);
+  line-height: var(--maps-line-height-display);
+  letter-spacing: var(--maps-letter-spacing-display);
+  font-weight: var(--maps-font-weight-regular);
   margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
 }
+
+/* section heading (h2 / h3) */
 h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
+  font-size: var(--maps-font-size-heading-lg);
+  line-height: var(--maps-line-height-heading-lg);
+  letter-spacing: var(--maps-letter-spacing-heading-lg);
+  font-weight: var(--maps-font-weight-medium);
   margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
 }
 p {
   margin: 0;
@@ -103,8 +117,9 @@ code {
   display: inline-flex;
   border-radius: 4px;
   color: var(--text-h);
-  font-size: 15px;
-  line-height: 135%;
+  font-size: var(--maps-font-size-body);
+  line-height: var(--maps-line-height-body);
+  letter-spacing: var(--maps-letter-spacing-body);
   padding: 4px 8px;
   background: var(--code-bg);
 }

@@ -7,29 +7,30 @@ import {
   useState,
 } from 'react'
 import type { KeyboardEvent } from 'react'
+import { cn } from '../../utils/cn'
 import type { HeaderTabProps, TabsItem, TabsProps, TabState } from './Tabs.types'
 
 export type { HeaderTabProps, TabsItem, TabsProps, TabState } from './Tabs.types'
 
-const labelBase =
-  'text-[20px] leading-6 tracking-[2px] uppercase whitespace-nowrap font-normal font-[family-name:Roboto,system-ui,sans-serif]'
+const labelBase = cn(
+  'font-maps-sans text-maps-overline font-maps-medium uppercase whitespace-nowrap',
+)
 
-const innerBase =
-  'flex items-center justify-center px-0 py-6 shrink-0 border-b-4 border-solid transition-[border-color,color] duration-200 ease-out'
+const innerBase = cn(
+  'flex shrink-0 items-center justify-center border-b-4 border-solid px-0 py-6',
+  'transition-[border-color,color] duration-200 ease-out',
+)
 
-function labelClassForState(state: TabState): string {
+function labelClassForState(state: TabState, disabled?: boolean): string {
+  if (disabled) return cn('text-maps-text-disabled opacity-50')
   switch (state) {
     case 'Selected':
-      return 'text-[#111]'
+      return 'text-maps-text-primary'
     case 'Hover':
-      return 'text-[#3d4d66]'
+      return 'text-maps-text-tertiary'
     default:
-      return 'text-[#5a6b85]'
+      return 'text-maps-text-secondary'
   }
-}
-
-function cn(...parts: Array<string | false | undefined>): string {
-  return parts.filter(Boolean).join(' ')
 }
 
 /**
@@ -40,29 +41,28 @@ export function HeaderTab({
   className,
   state = 'Rest',
   text = 'MAPS',
+  disabled,
 }: HeaderTabProps) {
   const outer = cn(
     'flex flex-col items-center justify-center gap-0 px-5 py-0',
+    disabled && 'cursor-not-allowed',
     className,
   )
   const inner = cn(
     innerBase,
-    state === 'Selected' ? 'border-[#3054b1]' : 'border-transparent',
+    state === 'Selected' && !disabled ? 'border-maps-border-strong' : 'border-transparent',
   )
-  const labelClass = cn(labelBase, labelClassForState(state))
+  const labelClass = cn(labelBase, labelClassForState(state, disabled))
 
   const body = (
     <div className={inner}>
-      <p
-        className={labelClass}
-        style={{ fontVariationSettings: "'wdth' 100" }}
-      >
+      <p className={labelClass}>
         {text}
       </p>
     </div>
   )
 
-  if (state === 'Hover') {
+  if (state === 'Hover' && !disabled) {
     return (
       <button
         type="button"
@@ -165,7 +165,7 @@ function TabTrigger({ item, index }: { item: TabsItem; index: number }) {
       data-state={selected ? 'Selected' : 'Rest'}
       className={cn(
         'm-0 flex cursor-pointer flex-col items-center justify-center gap-0 border-0 bg-transparent px-5 py-0 text-left',
-        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3054b1]',
+        'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-maps-primary-500',
         item.disabled && 'cursor-not-allowed opacity-50',
       )}
       onClick={() => {
@@ -176,17 +176,16 @@ function TabTrigger({ item, index }: { item: TabsItem; index: number }) {
       <span
         className={cn(
           innerBase,
-          selected ? 'border-[#3054b1]' : 'border-transparent',
+          selected ? 'border-maps-border-strong' : 'border-transparent',
         )}
       >
         <span
           className={cn(
             labelBase,
             selected
-              ? 'text-[#111]'
-              : 'text-[#5a6b85] transition-colors duration-200 ease-out hover:text-[#3d4d66]',
+              ? 'text-maps-text-primary'
+              : 'text-maps-text-secondary transition-colors duration-200 ease-out hover:text-maps-text-tertiary',
           )}
-          style={{ fontVariationSettings: "'wdth' 100" }}
         >
           {item.text}
         </span>

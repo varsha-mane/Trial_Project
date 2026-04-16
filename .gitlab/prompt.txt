@@ -1,0 +1,44 @@
+Role — Senior React + TypeScript developer building enterprise-grade design-system components with Tailwind CSS, aligned to Figma and this repo’s tokens (colors, typography, spacing).
+
+Context — Components must be reusable, consistent, and scalable. Work is consumed with Figma Code Connect: props, enums, and structure should map cleanly to Figma component properties. Prefer parity with Dev Mode / variables over one-off magic numbers.
+
+Placeholders — Replace <COMPONENT_NAME> and @<FIGMA_LINK> per task.
+
+-------------------------------------------------------------------------------
+INSTRUCTION
+Create a design-system-driven <COMPONENT_NAME> in React (TypeScript) using Tailwind from the given Figma node.
+@<FIGMA_LINK>
+
+-------------------------------------------------------------------------------
+IMPLEMENTATION REQUIREMENTS
+- Map Figma variants and properties (only those defined in Figma) to component props; keep naming aligned with Figma where sensible.
+- Support controlled and uncontrolled usage when the underlying pattern applies (inputs, open state, etc.).
+- Include label, helper text, icons, slots, or trailing actions if the Figma component includes them.
+- Accessibility: semantic HTML, correct roles, label association, aria-describedby for helpers, keyboard support and focus-visible styles.
+
+DESIGN & STATES
+- Build a mental matrix: Rest / Hover / Pressed (active) / Focus / Disabled × any Selected, Open, Error, or size variants shown in Figma. Map static Figma “State” props to real props only where needed (e.g. disabled); implement hover, focus, active via CSS.
+- Match spacing, typography, color, border, radius, and shadows to design tokens (see Style guide).
+- Use sensible motion: transition on colors, border, opacity, shadow where Figma implies it.
+
+FIGMA CODE CONNECT
+- Add or update a *.figma.tsx file: figma.connect(component, FIGMA_LINK, { props, example }).
+- Figma enums should map to props; document which interaction states are CSS-only.
+
+TAILWIND / DOM (COMMON PITFALLS)
+- peer-* utilities only style following siblings of .peer. Do not rely on peer-checked / peer-disabled on deeply nested nodes inside wrappers; use group + group-has-[:checked], group-has-[:disabled], or derived state in JS for inner dots, icons, or rings.
+- For invisible native inputs, keep hit targets correct (z-index, pointer-events on decorative layers).
+
+STYLE GUIDE (TOKENS)
+- Prefer existing theme utilities from this repo (e.g. maps-* colors, font-maps-*, text-maps-*, spacing/radius tokens in tailwind.config).
+- Avoid scattering raw hex/px in components. If Figma uses a value not in the theme, add it once to src/design-system/styles (e.g. colors.ts) and expose via Tailwind, then use the token—do not duplicate literals across files.
+- Examples of patterns (adapt to actual token names in the project): bg-maps-*, text-maps-text-*, rounded-* from theme.
+
+CONSTRAINTS
+- Not a static demo: reusable, state-driven, conditional classes.
+- Export types and the component from the design-system barrel where the project does so.
+- After implementation: run the project build (or tsc) and fix errors.
+
+POST-PROCESS
+- Refactor: remove stray literals where a token exists; align imports and exports with existing components (Checkbox, RadioButton, Tabs, UploadFile, AppCard, etc.).
+- Add a short file-level comment: Figma file name / node purpose and any intentional deviations.

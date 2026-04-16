@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Generic design-system generation prompt (machine-readable mirror of .gitlab/prompt.txt).
+  Substitute COMPONENT_NAME and FIGMA_LINK when invoking.
+-->
+<prompt>
+
+  <input>
+    <field name="COMPONENT_NAME" type="string" required="true" />
+    <field name="FIGMA_LINK" type="string" required="true" />
+  </input>
+
+  <role>
+    Senior React + TypeScript + Tailwind; Figma-aligned; design tokens from repo (colors, typography, spacing).
+  </role>
+
+  <context>
+    Reusable design-system components; Figma Code Connect: props and enums align with Figma component properties.
+  </context>
+
+  <instruction>
+    Create a design-system-driven ${COMPONENT_NAME} in React (TypeScript) using Tailwind from the given Figma node.
+    @${FIGMA_LINK}
+  </instruction>
+
+  <requirements>
+    <rule>Map Figma variants and properties (Figma-defined only) to props; naming consistent with Figma where sensible</rule>
+    <rule>Support controlled and uncontrolled usage when applicable</rule>
+    <rule>Include label, helper text, icons, slots, or actions if present in Figma</rule>
+    <rule>Accessibility: semantic HTML, roles, label association, aria-describedby, keyboard, focus-visible</rule>
+  </requirements>
+
+  <design_rules>
+    <rule>Cover state matrix: Rest, Hover, Pressed, Focus, Disabled × Selected/Open/Error/size as in Figma</rule>
+    <rule>Map static State props to real props only when needed (e.g. disabled); hover/focus/active via CSS</rule>
+    <rule>Visuals match tokens: spacing, typography, color, border, radius, shadow</rule>
+    <rule>Smooth transitions where Figma implies interaction feedback</rule>
+    <rule>Reusable across screens; compatible with Figma Code Connect</rule>
+  </design_rules>
+
+  <code_connect>
+    <rule>Maintain *.figma.tsx with figma.connect(component, FIGMA_LINK, props, example)</rule>
+    <rule>Document which Figma states are prop-driven vs CSS-only</rule>
+  </code_connect>
+
+  <tailwind_dom>
+    <rule>peer-* applies only to following siblings of .peer; do not use peer-checked on deeply nested children</rule>
+    <rule>Use group + group-has-[:checked] / group-has-[:disabled] or JS state for inner indicators</rule>
+    <rule>Opaque inputs: preserve hit area and z-index for decorative layers</rule>
+  </tailwind_dom>
+
+  <style_guide>
+    <rule>Prefer theme tokens (e.g. maps-* colors, font-maps-*, text-maps-*) from tailwind config / design-system styles</rule>
+    <rule>Avoid raw hex/px in components; if missing from theme, add once to styles (e.g. colors.ts) then use token</rule>
+    <examples>
+      bg-maps-primary-500
+      text-maps-text-primary
+      font-maps-sans text-maps-body
+    </examples>
+  </style_guide>
+
+  <constraints>
+    <rule>Not static: state-driven, conditional Tailwind classes</rule>
+    <rule>Export types and barrel exports consistent with existing components</rule>
+    <rule>Run build or tsc after implementation</rule>
+  </constraints>
+
+  <post_process>
+    <step>Refactor stray literals into tokens where possible</step>
+    <step>Align exports and patterns with existing components</step>
+    <step>File comment: Figma reference and intentional deviations</step>
+  </post_process>
+
+</prompt>
