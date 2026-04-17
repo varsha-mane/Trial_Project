@@ -2,8 +2,7 @@
  * Figma Code Connect — MAPS UploadFile (`3094:5943`).
  * @see https://www.figma.com/design/VuFjMLBDrFeYhOhcqfGJtE/MAPS?node-id=3094-5943
  *
- * Figma exposes **State** (`Rest` / `File Hover`). **Layout** (`default` = OR + Browse,
- * `minimal` = dropzone only) maps the full MAPS frame vs the compact dropzone.
+ * Figma exposes **State** (`Rest` / `File Hover`); maps 1:1 to the `state` prop.
  */
 import figma from '@figma/code-connect/react'
 
@@ -15,16 +14,10 @@ figma.connect(
   {
     props: {
       state: figma.enum('State', {
-        Rest: 'Rest',
+        // Rest: 'Rest',
         'File Hover': 'File Hover',
       }),
-      layout: figma.enum('Layout', {
-        default: 'default',
-        minimal: 'minimal',
-      }),
     },
-    example: ({ state, layout }) => (
-      <UploadFile state={state} layout={layout} />
-    ),
+    example: ({ state }) => <UploadFile state={state} />,
   },
 )

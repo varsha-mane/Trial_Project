@@ -2,12 +2,14 @@ import { useState } from 'react'
 import {
   AppCard,
   Checkbox,
+  Dropdown,
   HeaderTab,
   RadioButton,
   Tabs,
   UploadFile,
 } from './design-system'
 import { cn } from './design-system/utils/cn'
+import { OnboardingWorkflowApp } from './pages/OnboardingWorkflowApp'
 import './App.css'
 
 /** MAPS typography tokens applied to the `#center` component previews */
@@ -41,6 +43,12 @@ const APP_CARD_FOOTER = {
   version: '17.4.1',
   build: '21E236',
 } as const
+
+const DROPDOWN_DEMO_OPTIONS = [
+  { label: 'Alpha', value: 'alpha' },
+  { label: 'Beta', value: 'beta' },
+  { label: 'Gamma', value: 'gamma' },
+] as const
 
 function AppIcon() {
   return (
@@ -77,9 +85,19 @@ function App() {
   const [mixIndeterminate, setMixIndeterminate] = useState(true)
   const [appCardSelected, setAppCardSelected] = useState(false)
   const [uploadDropNote, setUploadDropNote] = useState<string | null>(null)
+  const [dropdownDemo, setDropdownDemo] = useState<string | undefined>(undefined)
 
   return (
-    <>
+    <Tabs
+      aria-label="Design system preview"
+      className="w-full text-left"
+      defaultValue="gallery"
+      items={[
+        {
+          id: 'gallery',
+          text: 'COMPONENTS',
+          content: (
+            <>
       <section id="center">
         {/* <div className="hero">
           <img src={heroImg} className="base" width="170" height="179" alt="" />
@@ -92,7 +110,7 @@ function App() {
             Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
           </p>
         </div> */}
-        <div className="ds-checkbox-preview">
+        <div className="ds-section ds-checkbox-preview">
           <p className={previewTypography.sectionLabel}>Checkbox (Figma tokens)</p>
           <div className="ds-checkbox-preview__row">
             <Checkbox
@@ -125,7 +143,7 @@ function App() {
             <Checkbox checked disabled label="Disabled checked" />
           </div>
         </div>
-        <div className="ds-radio-preview">
+        <div className="ds-section ds-radio-preview">
           <p className={previewTypography.sectionLabel}>
             RadioButton (Figma tokens)
           </p>
@@ -187,7 +205,7 @@ function App() {
             />
           </div>
         </div>
-        <div className="ds-tabs-preview">
+        <div className="ds-section ds-tabs-preview">
           <p className={previewTypography.sectionLabel}>HeaderTab (Figma states)</p>
           <div className="ds-tabs-preview__row">
             <HeaderTab state="Rest" text="MAPS" />
@@ -218,13 +236,12 @@ function App() {
           />
         </div>
 
-        <div className="ds-upload-preview">
+        <div className="ds-section ds-upload-preview">
           <p className={previewTypography.sectionLabel}>
-            UploadFile — default layout (drag, OR, Browse Files)
+            UploadFile — interactive (drag, OR, Browse Files; node 3094:5943)
           </p>
           <UploadFile
             className="mx-auto w-full"
-            layout="default"
             onFileDrop={(files) =>
               setUploadDropNote(
                 files.length
@@ -239,19 +256,27 @@ function App() {
             </p>
           ) : null}
           <p className={`${previewTypography.sectionLabel} mt-6`}>
-            UploadFile — minimal layout (dropzone only, 200px)
-          </p>
-          <UploadFile className="mx-auto w-full" layout="minimal" />
-          <p className={`${previewTypography.sectionLabel} mt-6`}>
-            UploadFile — pinned State · minimal (matches node 3094:5943)
+            UploadFile — pinned State (Figma variants)
           </p>
           <div className="ds-upload-preview__row">
-            <UploadFile className="flex-1" layout="minimal" state="Rest" />
-            <UploadFile className="flex-1" layout="minimal" state="File Hover" />
+            <UploadFile className="flex-1" state="Rest" />
+            <UploadFile className="flex-1" state="File Hover" />
           </div>
         </div>
 
-        <div className="ds-app-card-gallery">
+        <div className="ds-section ds-dropdown-preview">
+          <p className={previewTypography.sectionLabel}>Dropdown</p>
+          <div className="mx-auto max-w-xs">
+            <Dropdown
+              placeholder="Select…"
+              options={[...DROPDOWN_DEMO_OPTIONS]}
+              value={dropdownDemo}
+              onChange={(v) => setDropdownDemo(v)}
+            />
+          </div>
+        </div>
+
+        <div className="ds-section ds-app-card-gallery">
           <p className={previewTypography.galleryTitle}>AppCard (all variations)</p>
           <div className="ds-app-card-gallery__grid">
             <div className="ds-app-card-gallery__cell">
@@ -627,7 +652,16 @@ function App() {
 
       <div className="ticks"></div>
       <section id="spacer"></section>
-    </>
+            </>
+          ),
+        },
+        {
+          id: 'onboarding',
+          text: 'ONBOARDING',
+          content: <OnboardingWorkflowApp />,
+        },
+      ]}
+    />
   )
 }
 

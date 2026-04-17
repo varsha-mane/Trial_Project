@@ -1,6 +1,2 @@
 export { UploadFile } from './UploadFile'
-export type {
-  UploadFileLayout,
-  UploadFileProps,
-  UploadFileState,
-} from './UploadFile'
+export type { UploadFileProps, UploadFileState } from './UploadFile'

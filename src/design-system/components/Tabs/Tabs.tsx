@@ -215,7 +215,10 @@ function TabPanel({
       tabIndex={selected ? 0 : -1}
       className="text-left"
     >
-      {item.content}
+      {/* Inactive panels stay in the a11y tree but unmount content so nested
+          controls (e.g. `input type="file"`) are not inside `display: none`,
+          which browsers block for programmatic `click()` / consistent drop UX. */}
+      {!hidden ? item.content : null}
     </div>
   )
 }

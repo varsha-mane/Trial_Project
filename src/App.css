@@ -1,3 +1,11 @@
+/* Major preview blocks in App.tsx — width, outer spacing, section divider */
+.ds-section {
+  box-sizing: border-box;
+  max-width: 80%;
+  margin: 50px;
+  border-bottom: 2px solid var(--border);
+}
+
 .ds-button-row {
   display: flex;
   flex-wrap: wrap;

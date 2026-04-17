@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "figma:connect:dry": "figma connect publish --dry-run",
+    "figma:connect:publish": "figma connect publish"
   },
   "dependencies": {
     "react": "^19.2.4",

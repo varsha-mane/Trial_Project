@@ -22,11 +22,10 @@ export type {
 } from './components/AppCard/AppCard'
 
 export { UploadFile } from './components/UploadFile'
-export type {
-  UploadFileLayout,
-  UploadFileProps,
-  UploadFileState,
-} from './components/UploadFile'
+export type { UploadFileProps, UploadFileState } from './components/UploadFile'
+
+export { Dropdown } from './components/Dropdown'
+export type { DropdownOption, DropdownProps } from './components/Dropdown'
 
 export { typography, tailwindThemeExtendTypography } from './styles/typography'
 export type { MapsTypography } from './styles/typography'

@@ -34,6 +34,36 @@ STYLE GUIDE (TOKENS)
 - Avoid scattering raw hex/px in components. If Figma uses a value not in the theme, add it once to src/design-system/styles (e.g. colors.ts) and expose via Tailwind, then use the token—do not duplicate literals across files.
 - Examples of patterns (adapt to actual token names in the project): bg-maps-*, text-maps-text-*, rounded-* from theme.
 
+DROPDOWN REQUIREMENTS
+
+- Implement real dropdown behavior:
+  - Toggle open/close on click
+  - Close on outside click and Escape
+  - Select option on click
+
+- Support keyboard navigation:
+  - Arrow keys to navigate
+  - Enter to select
+  - Escape to close
+
+- State management:
+  - Controlled + uncontrolled (value, onChange, isOpen)
+
+- Options:
+  - Accept dynamic options ({ label, value })
+  - No hardcoded items
+
+- Accessibility:
+  - role="listbox"/"option" (or combobox pattern)
+  - aria-expanded, aria-selected
+  - Proper focus handling
+
+- Positioning:
+  - Menu aligned to trigger
+  - Handle z-index/overflow
+
+- Reuse design-system components where applicable
+
 CONSTRAINTS
 - Not a static demo: reusable, state-driven, conditional classes.
 - Export types and the component from the design-system barrel where the project does so.
